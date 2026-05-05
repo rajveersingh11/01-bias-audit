@@ -1,0 +1,25 @@
+data:
+  raw_path: "data/adult_income.csv"
+  processed_path: "data/processed/clean.csv"
+  source: "scikit-learn/adult-census-income"
+  split: "train"
+
+protected_attributes:
+  - sex
+  - race
+  - marital.status
+
+model:
+  name: "distilbert-base-uncased-finetuned-sst-2-english"
+  batch_size: 32
+  max_length: 128
+
+report:
+  output_path: "outputs/"
+  title: "Bias Audit Report"
+  author: "Your Name"
+
+thresholds:
+  demographic_parity: 0.1
+  disparate_impact: 0.8
+  equal_opportunity: 0.1

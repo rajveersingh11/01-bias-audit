@@ -1,0 +1,29 @@
+# core ML
+scikit-learn
+pandas
+numpy
+
+# huggingface
+transformers
+datasets
+
+
+# pdf report generation
+reportlab
+fpdf2
+
+# visualization
+matplotlib
+seaborn
+
+# cli + utilities
+python-dotenv
+tqdm
+click
+
+# testing
+pytest
+pytest-cov
+
+
+pyyaml

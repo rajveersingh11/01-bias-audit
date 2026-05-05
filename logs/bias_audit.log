@@ -1,0 +1,6 @@
+[2026-05-05 16:45:51] INFO research.data_ingestion - No cache — downloading from HuggingFace...
+[2026-05-05 16:45:56] INFO research.data_ingestion - Saved to data\raw\adult_income.csv
+[2026-05-05 16:51:19] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-05 16:51:19] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-05 16:52:11] WARNING research.data_ingestion - High class imbalance detected — ratio 3.02x. Consider oversampling or class weights in model training.
+[2026-05-05 16:55:24] WARNING research.data_ingestion - High class imbalance detected — ratio 3.02x. Consider oversampling or class weights in model training.

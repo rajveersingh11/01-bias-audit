@@ -1,0 +1,19 @@
+model:
+  epochs: 3
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  warmup_steps: 100
+
+data:
+  test_size: 0.2
+  val_size: 0.1
+  random_seed: 42
+  max_samples: null        # null = use full dataset
+
+bias:
+  min_group_size: 100      # skip attribute groups smaller than this
+  confidence_level: 0.95
+
+evaluation:
+  batch_size: 64
+  device: "cpu"            # cpu or cuda
