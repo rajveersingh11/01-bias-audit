@@ -29,3 +29,52 @@ x==========x
 [2026-05-05 19:37:33] INFO __main__ - >>>>>> Stage: Data Ingestion completed <<<<<<
 
 x==========x
+[2026-05-05 19:52:56] INFO research.prepare_base_model - Loading tokenizer: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-05 19:54:02] INFO research.prepare_base_model - Loading model: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-05 20:43:35] INFO research.prepare_base_model - Loading tokenizer: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-05 20:44:48] INFO research.prepare_base_model - Loading model: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-05 20:45:23] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-05 20:45:23] INFO research.prepare_base_model - Loaded 30,162 rows for inference
+[2026-05-05 20:45:27] INFO research.prepare_base_model - Running inference on 500 sample rows...
+[2026-05-05 20:54:27] INFO __main__ - >>>>>> Stage: Data Ingestion started <<<<<<
+[2026-05-05 20:54:27] INFO src.pipeline.stage_01_data_ingestion - >>>>>> Stage 01 — Data Ingestion started <<<<<<
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - ==================================================
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Starting Data Ingestion Component
+[2026-05-05 20:54:27] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-05 20:54:27] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Cache found — loading from data\raw\adult_income.csv
+[2026-05-05 20:54:27] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
+[2026-05-05 20:54:27] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
+[2026-05-05 20:54:27] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
+[2026-05-05 20:54:27] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
+[2026-05-05 20:54:27] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
+[2026-05-05 20:54:27] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
+[2026-05-05 20:54:27] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-05 20:54:28] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-05 20:54:28] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
+[2026-05-05 20:54:28] INFO src.pipeline.stage_01_data_ingestion - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-05 20:54:28] INFO __main__ - >>>>>> Stage: Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-05 20:54:28] INFO __main__ - >>>>>> Stage: Prepare Base Model started <<<<<<
+[2026-05-05 20:54:47] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model started <<<<<<
+[2026-05-05 20:54:47] INFO src.components.prepare_base_model - ==================================================
+[2026-05-05 20:54:47] INFO src.components.prepare_base_model - Starting Prepare Base Model Component
+[2026-05-05 20:54:47] INFO src.components.prepare_base_model - Loading tokenizer: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-05 20:54:49] INFO src.components.prepare_base_model - Loading model: distilbert-base-uncased-finetuned-sst-2-english  (num_labels=2)
+[2026-05-05 20:54:50] DEBUG src.utils.common - Directory created: outputs\model
+[2026-05-05 20:54:50] DEBUG src.utils.common - Directory created: outputs\tokenizer
+[2026-05-05 20:54:52] INFO src.components.prepare_base_model - Model saved to outputs\model
+[2026-05-05 20:54:52] INFO src.components.prepare_base_model - Tokenizer saved to outputs\tokenizer
+[2026-05-05 20:54:52] INFO src.components.prepare_base_model - Prepare Base Model complete: BaseModelArtifact(model_path='outputs\\model', tokenizer_path='outputs\\tokenizer', model_name='distilbert-base-uncased-finetuned-sst-2-english', num_labels=2)
+[2026-05-05 20:54:53] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model completed <<<<<<
+
+x==========x
+[2026-05-05 20:54:53] INFO __main__ - >>>>>> Stage: Prepare Base Model completed <<<<<<
+
+x==========x
