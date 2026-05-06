@@ -3,6 +3,7 @@ data:
   processed_path: "data/processed/clean.csv"
   source: "scikit-learn/adult-census-income"
   split: "train"
+  source_url: null
 
 protected_attributes:
   - sex
@@ -11,8 +12,8 @@ protected_attributes:
 
 model:
   name: "distilbert-base-uncased-finetuned-sst-2-english"
-  batch_size: 32
-  max_length: 128
+  batch_size: 128    # increased from 32 for 4x throughput
+  max_length: 64     # reduced from 128 to halve attention computation
 
 report:
   output_path: "outputs/"

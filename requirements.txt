@@ -7,6 +7,8 @@ numpy
 transformers
 datasets
 
+# quantization
+torchao
 
 # pdf report generation
 reportlab

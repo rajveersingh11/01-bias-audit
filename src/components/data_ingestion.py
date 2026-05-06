@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from urllib import request as url_request
 
 import pandas as pd
 from datasets import load_dataset
@@ -20,6 +21,7 @@ from src.utils import (
     get_dataframe_info,
     validate_columns,
     encode_target,
+    get_size,
 )
 from src import get_logger
 
@@ -57,34 +59,55 @@ class DataIngestionArtifact:
 
 class DataIngestion:
     def __init__(self):
-        self.source           = CONFIG.data.source
-        self.split            = CONFIG.data.split
-        self.raw_path         = Path(RAW_DATA_FILE)
-        self.processed_path   = Path(PROCESSED_DATA_FILE)
+        self.source_url     = getattr(CONFIG.data, "source_url", None)  # optional URL
+        self.source_hf      = CONFIG.data.source                        # HuggingFace dataset id
+        self.split          = CONFIG.data.split
+        self.raw_path       = Path(RAW_DATA_FILE)
+        self.processed_path = Path(PROCESSED_DATA_FILE)
 
     # ── private ───────────────────────────────────────────────────────
 
-    def _download(self) -> pd.DataFrame:
-        """
-        Download from HuggingFace and cache to disk.
-        Returns cached CSV on subsequent runs.
-        """
-        if self.raw_path.exists():
-            logger.info(f"Cache found — loading from {self.raw_path}")
-            return load_dataframe(str(self.raw_path))
+    def _download_from_url(self) -> None:
+        """Download raw CSV directly from a URL using urllib."""
+        logger.info(f"Downloading from URL: {self.source_url}")
 
-        logger.info(f"No cache — downloading from HuggingFace: {self.source}")
+        filename, headers = url_request.urlretrieve(
+            url=self.source_url,
+            filename=str(self.raw_path),
+        )
+        logger.info(f"{filename} downloaded with following info:\n{headers}")
+
+    def _download_from_huggingface(self) -> None:
+        """Download from HuggingFace datasets and save as CSV."""
+        logger.info(f"Downloading from HuggingFace: {self.source_hf}")
 
         try:
-            ds = load_dataset(self.source, split=self.split)
+            ds = load_dataset(self.source_hf, split=self.split)
             df = ds.to_pandas()
+            save_dataframe(df, str(self.raw_path))
         except Exception as e:
             logger.error(f"HuggingFace download failed: {e}")
             raise
 
-        save_dataframe(df, str(self.raw_path))
-        logger.info(f"Raw dataset saved → {self.raw_path}  shape: {df.shape}")
-        return df
+    def _download(self) -> pd.DataFrame:
+        """
+        Download raw data — skips if already cached.
+        Prefers URL download if source_url is set in config,
+        falls back to HuggingFace otherwise.
+        """
+        if not self.raw_path.exists():
+            create_directories([str(self.raw_path.parent)])
+
+            if self.source_url:
+                self._download_from_url()
+            else:
+                self._download_from_huggingface()
+        else:
+            logger.info(
+                f"File already exists of size: {get_size(self.raw_path)}"
+            )
+
+        return load_dataframe(str(self.raw_path))
 
     def _strip_whitespace(self, df: pd.DataFrame) -> pd.DataFrame:
         """Strip leading/trailing whitespace from all string columns."""

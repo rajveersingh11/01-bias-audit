@@ -1,0 +1,174 @@
+{
+    "sex": {
+        "demographic_parity": {
+            "positive_rates": {
+                "Female": 0.129,
+                "Male": 0.1213
+            },
+            "max_gap": 0.0077,
+            "threshold": 0.1,
+            "passed": true
+        },
+        "disparate_impact": {
+            "positive_rates": {
+                "Female": 0.129,
+                "Male": 0.1213
+            },
+            "ratio": 0.9403,
+            "threshold": 0.8,
+            "passed": true
+        },
+        "equal_opportunity": {
+            "tpr_by_group": {
+                "Female": 0.1951,
+                "Male": 0.1402
+            },
+            "max_gap": 0.0549,
+            "threshold": 0.1,
+            "passed": true
+        },
+        "equalized_odds": {
+            "tpr_by_group": {
+                "Female": 0.1951,
+                "Male": 0.1402
+            },
+            "fpr_by_group": {
+                "Female": 0.1205,
+                "Male": 0.1126
+            },
+            "tpr_gap": 0.0549,
+            "fpr_gap": 0.0079,
+            "threshold": 0.1,
+            "passed": true
+        },
+        "attribute_passed": true
+    },
+    "race": {
+        "demographic_parity": {
+            "positive_rates": {
+                "Amer-Indian-Eskimo": 0.5175,
+                "Asian-Pac-Islander": 0.6011,
+                "Black": 0.0682,
+                "Other": 0.3247,
+                "White": 0.1072
+            },
+            "max_gap": 0.5329,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "disparate_impact": {
+            "positive_rates": {
+                "Amer-Indian-Eskimo": 0.5175,
+                "Asian-Pac-Islander": 0.6011,
+                "Black": 0.0682,
+                "Other": 0.3247,
+                "White": 0.1072
+            },
+            "ratio": 0.1135,
+            "threshold": 0.8,
+            "passed": false
+        },
+        "equal_opportunity": {
+            "tpr_by_group": {
+                "Amer-Indian-Eskimo": 0.6765,
+                "Asian-Pac-Islander": 0.6694,
+                "Black": 0.0956,
+                "Other": 0.1905,
+                "White": 0.1296
+            },
+            "max_gap": 0.5809,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "equalized_odds": {
+            "tpr_by_group": {
+                "Amer-Indian-Eskimo": 0.6765,
+                "Asian-Pac-Islander": 0.6694,
+                "Black": 0.0956,
+                "Other": 0.1905,
+                "White": 0.1296
+            },
+            "fpr_by_group": {
+                "Amer-Indian-Eskimo": 0.496,
+                "Asian-Pac-Islander": 0.575,
+                "Black": 0.0641,
+                "Other": 0.3381,
+                "White": 0.0992
+            },
+            "tpr_gap": 0.5809,
+            "fpr_gap": 0.5109,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "attribute_passed": false
+    },
+    "marital.status": {
+        "demographic_parity": {
+            "positive_rates": {
+                "Divorced": 0.102,
+                "Married-AF-spouse": 0.2381,
+                "Married-civ-spouse": 0.1204,
+                "Married-spouse-absent": 0.1514,
+                "Never-married": 0.1415,
+                "Separated": 0.0958,
+                "Widowed": 0.1016
+            },
+            "max_gap": 0.1423,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "disparate_impact": {
+            "positive_rates": {
+                "Divorced": 0.102,
+                "Married-AF-spouse": 0.2381,
+                "Married-civ-spouse": 0.1204,
+                "Married-spouse-absent": 0.1514,
+                "Never-married": 0.1415,
+                "Separated": 0.0958,
+                "Widowed": 0.1016
+            },
+            "ratio": 0.4024,
+            "threshold": 0.8,
+            "passed": false
+        },
+        "equal_opportunity": {
+            "tpr_by_group": {
+                "Divorced": 0.1748,
+                "Married-AF-spouse": 0.4,
+                "Married-civ-spouse": 0.1419,
+                "Married-spouse-absent": 0.1935,
+                "Never-married": 0.2,
+                "Separated": 0.1818,
+                "Widowed": 0.1375
+            },
+            "max_gap": 0.2625,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "equalized_odds": {
+            "tpr_by_group": {
+                "Divorced": 0.1748,
+                "Married-AF-spouse": 0.4,
+                "Married-civ-spouse": 0.1419,
+                "Married-spouse-absent": 0.1935,
+                "Never-married": 0.2,
+                "Separated": 0.1818,
+                "Widowed": 0.1375
+            },
+            "fpr_by_group": {
+                "Divorced": 0.0933,
+                "Married-AF-spouse": 0.0909,
+                "Married-civ-spouse": 0.1024,
+                "Married-spouse-absent": 0.1475,
+                "Never-married": 0.1385,
+                "Separated": 0.0893,
+                "Widowed": 0.0977
+            },
+            "tpr_gap": 0.2625,
+            "fpr_gap": 0.0582,
+            "threshold": 0.1,
+            "passed": false
+        },
+        "attribute_passed": false
+    }
+}

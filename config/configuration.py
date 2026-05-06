@@ -19,6 +19,7 @@ class DataConfig:
     processed_path: Path
     source: str
     split: str
+    source_url: str | None = None
 
 
 @dataclass
@@ -85,6 +86,7 @@ def load_config(
             processed_path=PROCESSED_DATA_FILE,
             source=raw["data"]["source"],
             split=raw["data"]["split"],
+            source_url=raw["data"].get("source_url"),
         ),
         model=ModelConfig(
             name=raw["model"]["name"],

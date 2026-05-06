@@ -5,6 +5,7 @@ import yaml
 import json
 import joblib
 import pandas as pd
+import numpy as np
 from pathlib import Path
 from typing import Any
 from src import get_logger
@@ -16,6 +17,24 @@ from src.constants import (
 )
 
 logger = get_logger(__name__)
+
+
+class _JSONEncoder(json.JSONEncoder):
+    """
+    Handles numpy types that json.dump can't serialize natively.
+    Why: pandas/numpy operations return np.bool_, np.int64, etc.
+    These crash json.dump unless explicitly converted to Python natives.
+    """
+    def default(self, obj):
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super().default(obj)
 
 
 # ── directory helpers ────────────────────────────────────────────────
@@ -46,6 +65,15 @@ def init_project_dirs() -> None:
     logger.info("All output directories initialised")
 
 
+def get_size(path: Path) -> str:
+    """Return human-readable file size — e.g. '~ 3 MB'."""
+    size_kb = round(path.stat().st_size / 1024)
+    if size_kb < 1024:
+        return f"~ {size_kb} KB"
+    size_mb = round(size_kb / 1024, 2)
+    return f"~ {size_mb} MB"
+
+
 # ── file I/O ─────────────────────────────────────────────────────────
 
 def save_yaml(data: dict, path: str) -> None:
@@ -65,7 +93,7 @@ def load_yaml(path: str) -> dict:
 def save_json(data: dict, path: str) -> None:
     create_directories([str(Path(path).parent)])
     with open(path, "w") as f:
-        json.dump(data, f, indent=4)
+        json.dump(data, f, indent=4, cls=_JSONEncoder)
     logger.info(f"JSON saved: {path}")
 
 
@@ -137,6 +165,7 @@ def encode_target(df: pd.DataFrame, column: str,
 def is_within_threshold(value: float, threshold: float,
                         direction: str = "below") -> bool:
     result = value <= threshold if direction == "below" else value >= threshold
+    result = bool(result)  # cast numpy.bool_ → Python bool (defensive)
     status = "PASS" if result else "FAIL"
     logger.info(f"Threshold check [{status}] value={value:.4f} "
                 f"threshold={threshold} direction={direction}")

@@ -11,8 +11,8 @@ protected_attributes:
 
 model:
   name: "distilbert-base-uncased-finetuned-sst-2-english"
-  batch_size: 32
-  max_length: 128
+  batch_size: 128
+  max_length: 64
 
 report:
   output_path: "outputs/"
