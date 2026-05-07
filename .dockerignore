@@ -1,0 +1,61 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.venv
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# DVC
+.dvc
+*.dvc.lock
+# But keep .dvc/config if needed for remote storage
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Data and outputs (optional - include for layer caching benefits)
+data/raw/*.csv
+data/processed/*.csv
+outputs/cache/*
+logs/*
+
+# Documentation
+docs/
+*.md
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.circleci/
+
+# Other
+*.log
+*.tmp
+.env
+.env.local
+research/
+tests/

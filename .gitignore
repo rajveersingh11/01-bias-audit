@@ -10,4 +10,19 @@ wheels/
 .venv
 .env
 
+# data and model artifacts — tracked by DVC not Git
+data/raw/
+data/processed/
 outputs/model/
+outputs/tokenizer/
+outputs/cache/
+outputs/reports/
+outputs/metrics/
+
+# DVC internal
+.dvc/tmp/
+.dvc/cache/
+
+# logs
+logs/
+*.log

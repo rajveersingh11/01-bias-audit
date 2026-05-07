@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 21bb990426f8ad3adaf8bbf33a6d37a8
+      size: 621
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: 7d76687901a6bfa1ec52268f40d5a434
+      size: 9446
+    - path: src/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 721e2a8d18df6be45f157a73ba159999
+      size: 1438
+    - path: src/utils/common.py
+      hash: md5
+      md5: 3cd14731dca5852aab4a2473f80eee07
+      size: 5825
+    params:
+      params.yaml:
+        bias.min_group_size: 100
+        data.random_seed: 42
+        data.test_size: 0.2
+    outs:
+    - path: data/processed/clean.csv
+      hash: md5
+      md5: 77da1e96ef09612bb37d22ac340b6d78
+      size: 3215063
+    - path: data/raw/adult_income.csv
+      hash: md5
+      md5: 066f3d47289b74b1f5bc3f9890536f78
+      size: 3551168
+  prepare_base_model:
+    cmd: python src/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 21bb990426f8ad3adaf8bbf33a6d37a8
+      size: 621
+    - path: src/components/prepare_base_model.py
+      hash: md5
+      md5: 3dd6593904534067435d9a3916be589f
+      size: 5924
+    - path: src/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: a7fa9709314a0d228c685afcfbd60cd2
+      size: 1418
+    params:
+      params.yaml:
+        model.epochs: 3
+        model.learning_rate: 2e-05
+    outs:
+    - path: outputs/model
+      hash: md5
+      md5: 0dc3636fb692fef7ab7979b039b3d733.dir
+      size: 267833361
+      nfiles: 2
+    - path: outputs/tokenizer
+      hash: md5
+      md5: 7f80d1bbbfd6964fa74854af1d3239a7.dir
+      size: 711762
+      nfiles: 2

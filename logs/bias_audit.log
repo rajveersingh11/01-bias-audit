@@ -1,152 +1,319 @@
-[2026-05-06 16:30:18] INFO __main__ - ==================================================
-[2026-05-06 16:30:18] INFO __main__ - Starting Evaluation Component
-[2026-05-06 16:30:18] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:30:18] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
-[2026-05-06 16:30:18] INFO __main__ - Data loaded — shape: (30162, 15)
-[2026-05-06 16:30:18] INFO __main__ - Loading tokenizer from outputs\tokenizer
-[2026-05-06 16:30:18] INFO __main__ - Loading model from outputs\model
-[2026-05-06 16:30:25] INFO __main__ - Model quantized to int8 via torch.quantization (legacy)
-[2026-05-06 16:30:26] INFO __main__ - Model compiled with torch.compile (eager backend)
-[2026-05-06 16:30:26] INFO __main__ - Model ready on cpu
-[2026-05-06 16:31:09] DEBUG __main__ - Inference progress: 20/236 batches (8%)
-[2026-05-06 16:31:48] DEBUG __main__ - Inference progress: 40/236 batches (17%)
-[2026-05-06 16:32:22] DEBUG __main__ - Inference progress: 60/236 batches (25%)
-[2026-05-06 16:32:55] DEBUG __main__ - Inference progress: 80/236 batches (34%)
-[2026-05-06 16:33:28] DEBUG __main__ - Inference progress: 100/236 batches (42%)
-[2026-05-06 16:34:00] DEBUG __main__ - Inference progress: 120/236 batches (51%)
-[2026-05-06 16:34:32] DEBUG __main__ - Inference progress: 140/236 batches (59%)
-[2026-05-06 16:35:04] DEBUG __main__ - Inference progress: 160/236 batches (68%)
-[2026-05-06 16:35:36] DEBUG __main__ - Inference progress: 180/236 batches (76%)
-[2026-05-06 16:36:08] DEBUG __main__ - Inference progress: 200/236 batches (85%)
-[2026-05-06 16:36:42] DEBUG __main__ - Inference progress: 220/236 batches (93%)
-[2026-05-06 16:37:12] INFO __main__ - Inference complete — 30,162 predictions
-[2026-05-06 16:37:14] INFO __main__ - Overall accuracy : 0.7011
-[2026-05-06 16:37:14] INFO __main__ - ROC-AUC          : 0.5531
-[2026-05-06 16:37:14] INFO __main__ - Avg precision    : 0.2794
-[2026-05-06 16:37:14] INFO __main__ - Computing bias metrics for: sex
-[2026-05-06 16:37:14] INFO src.utils.common - Threshold check [PASS] value=0.0077 threshold=0.1 direction=below
-[2026-05-06 16:37:14] INFO src.utils.common - Threshold check [PASS] value=0.9403 threshold=0.8 direction=above
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [PASS] value=0.0079 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO __main__ - All bias checks passed for 'sex' ✅
-[2026-05-06 16:37:15] INFO __main__ - Computing bias metrics for: race
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.5329 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.1135 threshold=0.8 direction=above
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
-[2026-05-06 16:37:15] WARNING __main__ - Bias detected for 'race' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
-[2026-05-06 16:37:15] INFO __main__ - Computing bias metrics for: marital.status
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.1423 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.4024 threshold=0.8 direction=above
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
-[2026-05-06 16:37:15] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
-[2026-05-06 16:37:15] WARNING __main__ - Bias detected for 'marital.status' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
-[2026-05-06 16:37:15] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:37:15] INFO src.utils.common - JSON saved: outputs\metrics\metrics.json
-[2026-05-06 16:37:15] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:37:15] INFO src.utils.common - JSON saved: outputs\metrics\bias_report.json
-[2026-05-06 16:37:15] INFO __main__ - Evaluation complete: EvaluationArtifact(metrics_path='outputs\\metrics\\metrics.json', bias_report_path='outputs\\metrics\\bias_report.json', overall_accuracy=0.7011, roc_auc=0.5531, all_bias_checks_passed=False, flagged_attributes=['race', 'marital.status'])
-
-[2026-05-06 16:39:07] INFO __main__ - >>>>>> Stage: Data Ingestion started <<<<<<
-[2026-05-06 16:39:13] INFO src.pipeline.stage_01_data_ingestion - >>>>>> Stage 01 — Data Ingestion started <<<<<<
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - ==================================================
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Starting Data Ingestion Component
-[2026-05-06 16:39:13] DEBUG src.utils.common - Directory created: data\raw
-[2026-05-06 16:39:13] DEBUG src.utils.common - Directory created: data\processed
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - File already exists of size: ~ 3.39 MB
-[2026-05-06 16:39:13] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
-[2026-05-06 16:39:13] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
-[2026-05-06 16:39:13] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
-[2026-05-06 16:39:13] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
-[2026-05-06 16:39:13] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
-[2026-05-06 16:39:13] DEBUG src.utils.common - Directory created: data\processed
-[2026-05-06 16:39:13] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
-[2026-05-06 16:39:13] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
-[2026-05-06 16:39:13] INFO src.pipeline.stage_01_data_ingestion - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+[2026-05-07 19:44:45] INFO __main__ - >>>>>> Stage: Data Ingestion completed <<<<<<
 
 x==========x
-[2026-05-06 16:39:13] INFO __main__ - >>>>>> Stage: Data Ingestion completed <<<<<<
+[2026-05-07 19:44:45] INFO __main__ - >>>>>> Stage: Prepare Base Model started <<<<<<
+[2026-05-07 19:44:54] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model started <<<<<<
+[2026-05-07 19:44:54] INFO src.components.prepare_base_model - ==================================================
+[2026-05-07 19:44:54] INFO src.components.prepare_base_model - Starting Prepare Base Model Component
+[2026-05-07 19:44:54] INFO src.components.prepare_base_model - Model cache found — skipping download and save
+[2026-05-07 19:44:54] INFO src.components.prepare_base_model - Prepare Base Model complete (from cache): BaseModelArtifact(model_path='outputs\\model', tokenizer_path='outputs\\tokenizer', model_name='distilbert-base-uncased-finetuned-sst-2-english', num_labels=2)
+[2026-05-07 19:44:54] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model completed <<<<<<
 
 x==========x
-[2026-05-06 16:39:13] INFO __main__ - >>>>>> Stage: Prepare Base Model started <<<<<<
-[2026-05-06 16:39:23] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model started <<<<<<
-[2026-05-06 16:39:23] INFO src.components.prepare_base_model - ==================================================
-[2026-05-06 16:39:23] INFO src.components.prepare_base_model - Starting Prepare Base Model Component
-[2026-05-06 16:39:23] INFO src.components.prepare_base_model - Model cache found — skipping download and save
-[2026-05-06 16:39:23] INFO src.components.prepare_base_model - Prepare Base Model complete (from cache): BaseModelArtifact(model_path='outputs\\model', tokenizer_path='outputs\\tokenizer', model_name='distilbert-base-uncased-finetuned-sst-2-english', num_labels=2)
-[2026-05-06 16:39:23] INFO src.pipeline.stage_02_prepare_base_model - >>>>>> Stage 02 — Prepare Base Model completed <<<<<<
+[2026-05-07 19:44:54] INFO __main__ - >>>>>> Stage: Prepare Base Model completed <<<<<<
 
 x==========x
-[2026-05-06 16:39:23] INFO __main__ - >>>>>> Stage: Prepare Base Model completed <<<<<<
+[2026-05-07 19:44:54] INFO __main__ - >>>>>> Stage: Evaluation started <<<<<<
+[2026-05-07 19:44:54] INFO src.pipeline.stage_03_evaluation - >>>>>> Stage 03 — Bias Metrics started <<<<<<
+[2026-05-07 19:44:54] INFO src.components.evaluation - ==================================================
+[2026-05-07 19:44:54] INFO src.components.evaluation - Starting Evaluation Component
+[2026-05-07 19:44:54] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 19:44:55] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 19:44:55] INFO src.components.evaluation - Data loaded — shape: (30162, 15)
+[2026-05-07 19:44:55] INFO src.components.evaluation - Loading tokenizer from outputs\tokenizer
+[2026-05-07 19:44:55] INFO src.components.evaluation - Loading model from outputs\model
+[2026-05-07 19:45:05] INFO src.components.evaluation - Model quantized to int8 via torch.quantization (legacy)
+[2026-05-07 19:45:09] INFO src.components.evaluation - Model compiled with torch.compile (eager backend)
+[2026-05-07 19:45:09] INFO src.components.evaluation - Model ready on cpu
+[2026-05-07 19:46:26] DEBUG src.components.evaluation - Inference progress: 20/236 batches (8%)
+[2026-05-07 19:47:17] DEBUG src.components.evaluation - Inference progress: 40/236 batches (17%)
+[2026-05-07 19:48:09] DEBUG src.components.evaluation - Inference progress: 60/236 batches (25%)
+[2026-05-07 19:49:01] DEBUG src.components.evaluation - Inference progress: 80/236 batches (34%)
+[2026-05-07 19:49:51] DEBUG src.components.evaluation - Inference progress: 100/236 batches (42%)
+[2026-05-07 19:50:38] DEBUG src.components.evaluation - Inference progress: 120/236 batches (51%)
+[2026-05-07 19:51:21] DEBUG src.components.evaluation - Inference progress: 140/236 batches (59%)
+[2026-05-07 19:52:05] DEBUG src.components.evaluation - Inference progress: 160/236 batches (68%)
+[2026-05-07 19:52:48] DEBUG src.components.evaluation - Inference progress: 180/236 batches (76%)
+[2026-05-07 19:53:32] DEBUG src.components.evaluation - Inference progress: 200/236 batches (85%)
+[2026-05-07 19:54:13] DEBUG src.components.evaluation - Inference progress: 220/236 batches (93%)
+[2026-05-07 19:54:52] INFO src.components.evaluation - Inference complete — 30,162 predictions
+[2026-05-07 19:54:52] INFO src.components.evaluation - Overall accuracy : 0.7011
+[2026-05-07 19:54:52] INFO src.components.evaluation - ROC-AUC          : 0.5531
+[2026-05-07 19:54:52] INFO src.components.evaluation - Avg precision    : 0.2794
+[2026-05-07 19:54:52] INFO src.components.evaluation - Computing bias metrics for: sex
+[2026-05-07 19:54:52] INFO src.utils.common - Threshold check [PASS] value=0.0077 threshold=0.1 direction=below
+[2026-05-07 19:54:52] INFO src.utils.common - Threshold check [PASS] value=0.9403 threshold=0.8 direction=above
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [PASS] value=0.0079 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.components.evaluation - All bias checks passed for 'sex' ✅
+[2026-05-07 19:54:53] INFO src.components.evaluation - Computing bias metrics for: race
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.5329 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.1135 threshold=0.8 direction=above
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
+[2026-05-07 19:54:53] WARNING src.components.evaluation - Bias detected for 'race' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
+[2026-05-07 19:54:53] INFO src.components.evaluation - Computing bias metrics for: marital.status
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.1423 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.4024 threshold=0.8 direction=above
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
+[2026-05-07 19:54:53] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
+[2026-05-07 19:54:53] WARNING src.components.evaluation - Bias detected for 'marital.status' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
+[2026-05-07 19:54:53] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 19:54:53] INFO src.utils.common - JSON saved: outputs\metrics\metrics.json
+[2026-05-07 19:54:53] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 19:54:53] INFO src.utils.common - JSON saved: outputs\metrics\bias_report.json
+[2026-05-07 19:54:53] INFO src.components.evaluation - Evaluation complete: EvaluationArtifact(metrics_path='outputs\\metrics\\metrics.json', bias_report_path='outputs\\metrics\\bias_report.json', overall_accuracy=0.7011, roc_auc=0.5531, all_bias_checks_passed=False, flagged_attributes=['race', 'marital.status'])
+[2026-05-07 19:54:53] INFO src.pipeline.stage_03_evaluation - >>>>>> Stage 03 — Bias Metrics completed <<<<<<
 
 x==========x
-[2026-05-06 16:39:23] INFO __main__ - >>>>>> Stage: Evaluation started <<<<<<
-[2026-05-06 16:39:23] INFO src.pipeline.stage_03_evaluation - >>>>>> Stage 03 — Bias Metrics started <<<<<<
-[2026-05-06 16:39:23] INFO src.components.evaluation - ==================================================
-[2026-05-06 16:39:23] INFO src.components.evaluation - Starting Evaluation Component
-[2026-05-06 16:39:23] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:39:23] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
-[2026-05-06 16:39:23] INFO src.components.evaluation - Data loaded — shape: (30162, 15)
-[2026-05-06 16:39:23] INFO src.components.evaluation - Loading tokenizer from outputs\tokenizer
-[2026-05-06 16:39:23] INFO src.components.evaluation - Loading model from outputs\model
-[2026-05-06 16:39:26] INFO src.components.evaluation - Model quantized to int8 via torch.quantization (legacy)
-[2026-05-06 16:39:27] INFO src.components.evaluation - Model compiled with torch.compile (eager backend)
-[2026-05-06 16:39:27] INFO src.components.evaluation - Model ready on cpu
-
-[2026-05-06 16:46:34] DEBUG src.components.evaluation - Inference progress: 200/236 batches (85%)
-[2026-05-06 16:47:08] DEBUG src.components.evaluation - Inference progress: 220/236 batches (93%)
-[2026-05-06 16:47:40] INFO src.components.evaluation - Inference complete — 30,162 predictions
-[2026-05-06 16:47:40] INFO src.components.evaluation - Overall accuracy : 0.7011
-[2026-05-06 16:47:40] INFO src.components.evaluation - ROC-AUC          : 0.5531
-[2026-05-06 16:47:40] INFO src.components.evaluation - Avg precision    : 0.2794
-[2026-05-06 16:47:40] INFO src.components.evaluation - Computing bias metrics for: sex
-[2026-05-06 16:47:40] INFO src.utils.common - Threshold check [PASS] value=0.0077 threshold=0.1 direction=below
-[2026-05-06 16:47:40] INFO src.utils.common - Threshold check [PASS] value=0.9403 threshold=0.8 direction=above
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [PASS] value=0.0079 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.components.evaluation - All bias checks passed for 'sex' ✅
-[2026-05-06 16:47:41] INFO src.components.evaluation - Computing bias metrics for: race
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.5329 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.1135 threshold=0.8 direction=above
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
-[2026-05-06 16:47:41] WARNING src.components.evaluation - Bias detected for 'race' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
-[2026-05-06 16:47:41] INFO src.components.evaluation - Computing bias metrics for: marital.status
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.1423 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.4024 threshold=0.8 direction=above
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
-[2026-05-06 16:47:41] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
-[2026-05-06 16:47:41] WARNING src.components.evaluation - Bias detected for 'marital.status' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
-[2026-05-06 16:47:41] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:47:41] INFO src.utils.common - JSON saved: outputs\metrics\metrics.json
-[2026-05-06 16:47:41] DEBUG src.utils.common - Directory created: outputs\metrics
-[2026-05-06 16:47:41] INFO src.utils.common - JSON saved: outputs\metrics\bias_report.json
-[2026-05-06 16:47:41] INFO src.components.evaluation - Evaluation complete: EvaluationArtifact(metrics_path='outputs\\metrics\\metrics.json', bias_report_path='outputs\\metrics\\bias_report.json', overall_accuracy=0.7011, roc_auc=0.5531, all_bias_checks_passed=False, flagged_attributes=['race', 'marital.status'])
-[2026-05-06 16:47:41] INFO src.pipeline.stage_03_evaluation - >>>>>> Stage 03 — Bias Metrics completed <<<<<<
+[2026-05-07 19:54:53] INFO src.pipeline.stage_03_evaluation -   Accuracy              : 0.7011
+[2026-05-07 19:54:53] INFO src.pipeline.stage_03_evaluation -   ROC-AUC               : 0.5531
+[2026-05-07 19:54:53] INFO src.pipeline.stage_03_evaluation -   Bias verdict          : BIAS DETECTED ⚠️
+[2026-05-07 19:54:53] WARNING src.pipeline.stage_03_evaluation -   Flagged attributes    : ['race', 'marital.status']
+[2026-05-07 19:54:53] INFO __main__ - >>>>>> Stage: Evaluation completed <<<<<<
 
 x==========x
-[2026-05-06 16:47:41] INFO src.pipeline.stage_03_evaluation -   Accuracy              : 0.7011
-[2026-05-06 16:47:41] INFO src.pipeline.stage_03_evaluation -   ROC-AUC               : 0.5531
-[2026-05-06 16:47:41] INFO src.pipeline.stage_03_evaluation -   Bias verdict          : BIAS DETECTED ⚠️
-[2026-05-06 16:47:41] WARNING src.pipeline.stage_03_evaluation -   Flagged attributes    : ['race', 'marital.status']
-[2026-05-06 16:47:41] INFO __main__ - >>>>>> Stage: Evaluation completed <<<<<<
+[2026-05-07 19:54:53] INFO __main__ - >>>>>> Stage: Report Generation started <<<<<<
+[2026-05-07 19:54:56] INFO src.pipeline.stage_04_report - >>>>>> Stage 04 — Report Generation started <<<<<<
+[2026-05-07 19:54:56] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 19:54:56] WARNING src.pipeline.stage_04_report - No prediction cache found — using majority class placeholder. Run Evaluation stage first for accurate charts.
+[2026-05-07 19:54:57] INFO src.components.report - ==================================================
+[2026-05-07 19:54:57] INFO src.components.report - Starting Report Generation Component
+[2026-05-07 19:54:57] DEBUG src.utils.common - Directory created: outputs\reports
+[2026-05-07 19:54:57] DEBUG src.utils.common - Directory created: outputs\reports\charts
+[2026-05-07 19:54:57] DEBUG src.utils.common - JSON loaded: outputs\metrics\metrics.json
+[2026-05-07 19:54:57] DEBUG src.utils.common - JSON loaded: outputs\metrics\bias_report.json
+[2026-05-07 19:54:57] INFO src.components.report - Generating charts...
+[2026-05-07 19:54:57] INFO src.components.visualize - Generating all charts → outputs\reports\charts
+[2026-05-07 19:54:59] INFO src.components.visualize - Chart saved → outputs\reports\charts\class_distribution.png
+[2026-05-07 19:55:00] INFO src.components.visualize - Chart saved → outputs\reports\charts\dist_sex.png
+[2026-05-07 19:55:00] INFO src.components.visualize - Chart saved → outputs\reports\charts\dist_race.png
+[2026-05-07 19:55:01] INFO src.components.visualize - Chart saved → outputs\reports\charts\dist_marital_status.png
+[2026-05-07 19:55:01] INFO src.components.visualize - Chart saved → outputs\reports\charts\income_rate_sex.png
+[2026-05-07 19:55:02] INFO src.components.visualize - Chart saved → outputs\reports\charts\income_rate_race.png
+[2026-05-07 19:55:03] INFO src.components.visualize - Chart saved → outputs\reports\charts\income_rate_marital_status.png
+[2026-05-07 19:55:03] INFO src.components.visualize - Chart saved → outputs\reports\charts\confusion_matrix.png
+[2026-05-07 19:55:04] INFO src.components.visualize - Chart saved → outputs\reports\charts\roc_curve.png
+[2026-05-07 19:55:04] INFO src.components.visualize - Chart saved → outputs\reports\charts\bias_summary.png
+[2026-05-07 19:55:05] INFO src.components.visualize - Chart saved → outputs\reports\charts\positive_prediction_rate_sex.png
+[2026-05-07 19:55:05] INFO src.components.visualize - Chart saved → outputs\reports\charts\positive_prediction_rate_race.png
+[2026-05-07 19:55:05] INFO src.components.visualize - Chart saved → outputs\reports\charts\positive_prediction_rate_marital_status.png
+[2026-05-07 19:55:06] INFO src.components.visualize - Chart saved → outputs\reports\charts\eo_sex.png
+[2026-05-07 19:55:06] INFO src.components.visualize - Chart saved → outputs\reports\charts\eo_race.png
+[2026-05-07 19:55:07] INFO src.components.visualize - Chart saved → outputs\reports\charts\eo_marital_status.png
+[2026-05-07 19:55:07] INFO src.components.visualize - All charts generated ✅ — 8 chart groups
+[2026-05-07 19:55:07] INFO src.components.report - Building PDF report...
+[2026-05-07 19:55:08] WARNING src.components.report - Chart not found - skipping: outputs\reports\charts\dp_sex.png
+[2026-05-07 19:55:08] WARNING src.components.report - Chart not found - skipping: outputs\reports\charts\dp_race.png
+[2026-05-07 19:55:08] WARNING src.components.report - Chart not found - skipping: outputs\reports\charts\dp_marital_status.png
+[2026-05-07 19:55:08] INFO src.components.report - PDF report saved → outputs\reports\bias_audit_report.pdf  (672.8 KB)
+[2026-05-07 19:55:08] INFO src.components.report - Report generation complete: ReportArtifact(report_path='outputs\\reports\\bias_audit_report.pdf', charts_dir='outputs\\reports\\charts', all_bias_checks_passed=False, generated_at='2026-05-07T19:55:08.633111')
+[2026-05-07 19:55:08] INFO src.pipeline.stage_04_report - >>>>>> Stage 04 — Report Generation completed <<<<<<
 
 x==========x
-[2026-05-06 16:47:41] INFO __main__ - ============================================================
-[2026-05-06 16:47:41] INFO __main__ - PIPELINE COMPLETE
-[2026-05-06 16:47:41] INFO __main__ - ============================================================
-[2026-05-06 16:47:41] INFO __main__ -   Data      -> data\processed\clean.csv
-[2026-05-06 16:47:41] INFO __main__ -   Model     -> outputs\model
-[2026-05-06 16:47:41] INFO __main__ -   Metrics   -> outputs\metrics\metrics.json
-[2026-05-06 16:47:41] INFO __main__ -   Bias      -> outputs\metrics\bias_report.json
-[2026-05-06 16:47:41] INFO __main__ -   Accuracy  -> 0.7011
-[2026-05-06 16:47:41] INFO __main__ -   ROC-AUC   -> 0.5531
-[2026-05-06 16:47:41] INFO __main__ -   Result    -> BIAS DETECTED
-[2026-05-06 16:47:41] WARNING __main__ -   Flagged   -> ['race', 'marital.status']
-[2026-05-06 16:47:41] INFO __main__ - ============================================================
+[2026-05-07 19:55:08] INFO __main__ - >>>>>> Stage: Report Generation completed <<<<<<
+
+x==========x
+[2026-05-07 19:55:08] INFO __main__ - ============================================================
+[2026-05-07 19:55:08] INFO __main__ - PIPELINE COMPLETE
+[2026-05-07 19:55:08] INFO __main__ - ============================================================
+[2026-05-07 19:55:08] INFO __main__ -   Data      -> data\processed\clean.csv
+[2026-05-07 19:55:08] INFO __main__ -   Model     -> outputs\model
+[2026-05-07 19:55:08] INFO __main__ -   Metrics   -> outputs\metrics\metrics.json
+[2026-05-07 19:55:08] INFO __main__ -   Report    -> outputs\reports\bias_audit_report.pdf
+[2026-05-07 19:55:08] INFO __main__ -   Charts    -> outputs\reports\charts
+[2026-05-07 19:55:08] INFO __main__ -   Accuracy  -> 0.7011
+[2026-05-07 19:55:08] INFO __main__ -   ROC-AUC   -> 0.5531
+[2026-05-07 19:55:08] INFO __main__ -   Result    -> BIAS DETECTED
+[2026-05-07 19:55:08] WARNING __main__ -   Flagged   -> ['race', 'marital.status']
+[2026-05-07 19:55:08] INFO __main__ - ============================================================
+[2026-05-07 20:06:41] INFO __main__ - >>>>>> Stage 01 — Data Ingestion started <<<<<<
+[2026-05-07 20:06:41] INFO src.components.data_ingestion - ==================================================
+[2026-05-07 20:06:41] INFO src.components.data_ingestion - Starting Data Ingestion Component
+[2026-05-07 20:06:41] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:06:41] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:06:41] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:06:41] INFO src.components.data_ingestion - Downloading from HuggingFace: scikit-learn/adult-census-income
+[2026-05-07 20:06:46] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:06:47] INFO src.utils.common - DataFrame saved: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:06:47] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:06:47] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
+[2026-05-07 20:06:47] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
+[2026-05-07 20:06:47] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
+[2026-05-07 20:06:47] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
+[2026-05-07 20:06:47] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
+[2026-05-07 20:06:47] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
+[2026-05-07 20:06:47] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
+[2026-05-07 20:06:47] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
+[2026-05-07 20:06:47] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:06:47] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 20:06:47] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
+[2026-05-07 20:06:47] INFO __main__ - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-07 20:07:03] INFO __main__ - >>>>>> Stage 01 — Data Ingestion started <<<<<<
+[2026-05-07 20:07:03] INFO src.components.data_ingestion - ==================================================
+[2026-05-07 20:07:03] INFO src.components.data_ingestion - Starting Data Ingestion Component
+[2026-05-07 20:07:03] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:07:03] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:07:03] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:07:03] INFO src.components.data_ingestion - Downloading from HuggingFace: scikit-learn/adult-census-income
+[2026-05-07 20:07:11] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:07:11] INFO src.utils.common - DataFrame saved: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:07:11] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:07:11] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
+[2026-05-07 20:07:11] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
+[2026-05-07 20:07:11] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
+[2026-05-07 20:07:11] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
+[2026-05-07 20:07:11] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
+[2026-05-07 20:07:11] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
+[2026-05-07 20:07:11] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
+[2026-05-07 20:07:11] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
+[2026-05-07 20:07:11] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:07:11] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 20:07:11] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
+[2026-05-07 20:07:11] INFO __main__ - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-07 20:08:10] INFO __main__ - >>>>>> Stage 01 — Data Ingestion started <<<<<<
+[2026-05-07 20:08:10] INFO src.components.data_ingestion - ==================================================
+[2026-05-07 20:08:10] INFO src.components.data_ingestion - Starting Data Ingestion Component
+[2026-05-07 20:08:10] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:08:10] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:08:10] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:08:10] INFO src.components.data_ingestion - Downloading from HuggingFace: scikit-learn/adult-census-income
+[2026-05-07 20:08:20] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:08:20] INFO src.utils.common - DataFrame saved: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:08:21] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:08:21] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
+[2026-05-07 20:08:21] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
+[2026-05-07 20:08:21] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
+[2026-05-07 20:08:21] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
+[2026-05-07 20:08:21] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
+[2026-05-07 20:08:21] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
+[2026-05-07 20:08:21] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
+[2026-05-07 20:08:21] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
+[2026-05-07 20:08:21] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:08:21] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 20:08:21] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
+[2026-05-07 20:08:21] INFO __main__ - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-07 20:10:05] INFO __main__ - >>>>>> Stage 01 — Data Ingestion started <<<<<<
+[2026-05-07 20:10:05] INFO src.components.data_ingestion - ==================================================
+[2026-05-07 20:10:05] INFO src.components.data_ingestion - Starting Data Ingestion Component
+[2026-05-07 20:10:05] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:10:05] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:10:05] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:10:05] INFO src.components.data_ingestion - Downloading from HuggingFace: scikit-learn/adult-census-income
+[2026-05-07 20:10:10] DEBUG src.utils.common - Directory created: data\raw
+[2026-05-07 20:10:10] INFO src.utils.common - DataFrame saved: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:10:10] INFO src.utils.common - DataFrame loaded: data\raw\adult_income.csv — shape: (32561, 15)
+[2026-05-07 20:10:10] INFO src.components.data_ingestion - Cleaning started — shape before: (32561, 15)
+[2026-05-07 20:10:10] DEBUG src.components.data_ingestion - Whitespace stripped from 9 string columns
+[2026-05-07 20:10:10] INFO src.components.data_ingestion - Dropped 2,399 rows with missing values (7.37%)
+[2026-05-07 20:10:10] INFO src.components.data_ingestion - Target 'income' encoded: {0: 22654, 1: 7508}
+[2026-05-07 20:10:10] INFO src.components.data_ingestion - Cleaning complete — shape after: (30162, 15)
+[2026-05-07 20:10:10] DEBUG src.components.data_ingestion - Null counts after clean: {'age': 0, 'workclass': 0, 'fnlwgt': 0, 'education': 0, 'education.num': 0, 'marital.status': 0, 'occupation': 0, 'relationship': 0, 'race': 0, 'sex': 0, 'capital.gain': 0, 'capital.loss': 0, 'hours.per.week': 0, 'native.country': 0, 'income': 0}
+[2026-05-07 20:10:10] WARNING src.components.data_ingestion - High class imbalance — ratio 3.02x. Consider class weights or oversampling in model training.
+[2026-05-07 20:10:10] WARNING src.components.data_ingestion - Attribute 'marital.status' has groups below min_group_size=100: {'Married-AF-spouse': 21} — bias metrics may be unreliable for these groups.
+[2026-05-07 20:10:10] DEBUG src.utils.common - Directory created: data\processed
+[2026-05-07 20:10:10] INFO src.utils.common - DataFrame saved: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 20:10:10] INFO src.components.data_ingestion - Data Ingestion complete: DataIngestionArtifact(raw_data_path='data\\raw\\adult_income.csv', processed_data_path='data\\processed\\clean.csv', row_count=30162, column_count=15, dropped_rows=2399, class_distribution={0: 22654, 1: 7508})
+[2026-05-07 20:10:10] INFO __main__ - >>>>>> Stage 01 — Data Ingestion completed <<<<<<
+
+x==========x
+[2026-05-07 20:10:26] INFO __main__ - >>>>>> Stage 02 — Prepare Base Model started <<<<<<
+[2026-05-07 20:10:26] INFO src.components.prepare_base_model - ==================================================
+[2026-05-07 20:10:26] INFO src.components.prepare_base_model - Starting Prepare Base Model Component
+[2026-05-07 20:10:26] DEBUG src.utils.common - Directory created: outputs\model
+[2026-05-07 20:10:26] DEBUG src.utils.common - Directory created: outputs\tokenizer
+[2026-05-07 20:10:26] INFO src.components.prepare_base_model - Loading tokenizer: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-07 20:10:28] INFO src.components.prepare_base_model - Tokenizer loaded
+[2026-05-07 20:10:28] INFO src.components.prepare_base_model - Loading model: distilbert-base-uncased-finetuned-sst-2-english  (num_labels=2)
+[2026-05-07 20:10:30] INFO src.components.prepare_base_model - Model loaded — Parameters: 66,955,010
+[2026-05-07 20:10:30] INFO src.components.prepare_base_model - Saving model to temp directory...
+[2026-05-07 20:10:33] INFO src.components.prepare_base_model - Saved as safetensors
+[2026-05-07 20:10:33] INFO src.components.prepare_base_model - Saving tokenizer to temp directory...
+[2026-05-07 20:10:40] INFO src.components.prepare_base_model - Model moved to outputs\model
+[2026-05-07 20:10:40] INFO src.components.prepare_base_model - Tokenizer moved to outputs\tokenizer
+[2026-05-07 20:10:40] INFO src.components.prepare_base_model - Prepare Base Model complete: BaseModelArtifact(model_path='outputs\\model', tokenizer_path='outputs\\tokenizer', model_name='distilbert-base-uncased-finetuned-sst-2-english', num_labels=2)
+[2026-05-07 20:10:40] INFO __main__ - >>>>>> Stage 02 — Prepare Base Model completed <<<<<<
+
+x==========x
+[2026-05-07 20:11:45] INFO __main__ - >>>>>> Stage 02 — Prepare Base Model started <<<<<<
+[2026-05-07 20:11:45] INFO src.components.prepare_base_model - ==================================================
+[2026-05-07 20:11:45] INFO src.components.prepare_base_model - Starting Prepare Base Model Component
+[2026-05-07 20:11:45] DEBUG src.utils.common - Directory created: outputs\model
+[2026-05-07 20:11:45] DEBUG src.utils.common - Directory created: outputs\tokenizer
+[2026-05-07 20:11:45] INFO src.components.prepare_base_model - Loading tokenizer: distilbert-base-uncased-finetuned-sst-2-english
+[2026-05-07 20:11:47] INFO src.components.prepare_base_model - Tokenizer loaded
+[2026-05-07 20:11:47] INFO src.components.prepare_base_model - Loading model: distilbert-base-uncased-finetuned-sst-2-english  (num_labels=2)
+[2026-05-07 20:11:48] INFO src.components.prepare_base_model - Model loaded — Parameters: 66,955,010
+[2026-05-07 20:11:48] INFO src.components.prepare_base_model - Saving model to temp directory...
+[2026-05-07 20:11:50] INFO src.components.prepare_base_model - Saved as safetensors
+[2026-05-07 20:11:50] INFO src.components.prepare_base_model - Saving tokenizer to temp directory...
+[2026-05-07 20:11:55] INFO src.components.prepare_base_model - Model moved to outputs\model
+[2026-05-07 20:11:55] INFO src.components.prepare_base_model - Tokenizer moved to outputs\tokenizer
+[2026-05-07 20:11:55] INFO src.components.prepare_base_model - Prepare Base Model complete: BaseModelArtifact(model_path='outputs\\model', tokenizer_path='outputs\\tokenizer', model_name='distilbert-base-uncased-finetuned-sst-2-english', num_labels=2)
+[2026-05-07 20:11:55] INFO __main__ - >>>>>> Stage 02 — Prepare Base Model completed <<<<<<
+
+x==========x
+[2026-05-07 20:12:10] INFO __main__ - >>>>>> Stage 03 — Bias Metrics started <<<<<<
+[2026-05-07 20:12:10] INFO src.components.evaluation - ==================================================
+[2026-05-07 20:12:10] INFO src.components.evaluation - Starting Evaluation Component
+[2026-05-07 20:12:10] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 20:12:10] INFO src.utils.common - DataFrame loaded: data\processed\clean.csv — shape: (30162, 15)
+[2026-05-07 20:12:10] INFO src.components.evaluation - Data loaded — shape: (30162, 15)
+[2026-05-07 20:12:10] INFO src.components.evaluation - Loading tokenizer from outputs\tokenizer
+[2026-05-07 20:12:11] INFO src.components.evaluation - Loading model from outputs\model
+[2026-05-07 20:12:13] INFO src.components.evaluation - Model quantized to int8 via torch.quantization (legacy)
+[2026-05-07 20:12:15] INFO src.components.evaluation - Model compiled with torch.compile (eager backend)
+[2026-05-07 20:12:15] INFO src.components.evaluation - Model ready on cpu
+[2026-05-07 20:13:16] DEBUG src.components.evaluation - Inference progress: 20/236 batches (8%)
+[2026-05-07 20:14:01] DEBUG src.components.evaluation - Inference progress: 40/236 batches (17%)
+[2026-05-07 20:14:46] DEBUG src.components.evaluation - Inference progress: 60/236 batches (25%)
+[2026-05-07 20:15:29] DEBUG src.components.evaluation - Inference progress: 80/236 batches (34%)
+[2026-05-07 20:16:11] DEBUG src.components.evaluation - Inference progress: 100/236 batches (42%)
+[2026-05-07 20:17:06] DEBUG src.components.evaluation - Inference progress: 120/236 batches (51%)
+[2026-05-07 20:29:58] DEBUG src.components.evaluation - Inference progress: 140/236 batches (59%)
+[2026-05-07 20:30:41] DEBUG src.components.evaluation - Inference progress: 160/236 batches (68%)
+[2026-05-07 20:31:22] DEBUG src.components.evaluation - Inference progress: 180/236 batches (76%)
+[2026-05-07 20:32:16] DEBUG src.components.evaluation - Inference progress: 200/236 batches (85%)
+[2026-05-07 20:32:58] DEBUG src.components.evaluation - Inference progress: 220/236 batches (93%)
+[2026-05-07 20:33:36] INFO src.components.evaluation - Inference complete — 30,162 predictions
+[2026-05-07 20:33:36] INFO src.components.evaluation - Overall accuracy : 0.7011
+[2026-05-07 20:33:36] INFO src.components.evaluation - ROC-AUC          : 0.5531
+[2026-05-07 20:33:36] INFO src.components.evaluation - Avg precision    : 0.2794
+[2026-05-07 20:33:36] INFO src.components.evaluation - Computing bias metrics for: sex
+[2026-05-07 20:33:36] INFO src.utils.common - Threshold check [PASS] value=0.0077 threshold=0.1 direction=below
+[2026-05-07 20:33:36] INFO src.utils.common - Threshold check [PASS] value=0.9403 threshold=0.8 direction=above
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [PASS] value=0.0549 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [PASS] value=0.0079 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.components.evaluation - All bias checks passed for 'sex' ✅
+[2026-05-07 20:33:38] INFO src.components.evaluation - Computing bias metrics for: race
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.5329 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.1135 threshold=0.8 direction=above
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.5809 threshold=0.1 direction=below
+[2026-05-07 20:33:38] WARNING src.components.evaluation - Bias detected for 'race' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
+[2026-05-07 20:33:38] INFO src.components.evaluation - Computing bias metrics for: marital.status
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.1423 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.4024 threshold=0.8 direction=above
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
+[2026-05-07 20:33:38] INFO src.utils.common - Threshold check [FAIL] value=0.2625 threshold=0.1 direction=below
+[2026-05-07 20:33:38] WARNING src.components.evaluation - Bias detected for 'marital.status' — failed checks: ['demographic_parity', 'disparate_impact', 'equal_opportunity', 'equalized_odds']
+[2026-05-07 20:33:38] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 20:33:38] INFO src.utils.common - JSON saved: outputs\metrics\metrics.json
+[2026-05-07 20:33:38] DEBUG src.utils.common - Directory created: outputs\metrics
+[2026-05-07 20:33:38] INFO src.utils.common - JSON saved: outputs\metrics\bias_report.json
+[2026-05-07 20:33:38] INFO src.components.evaluation - Evaluation complete: EvaluationArtifact(metrics_path='outputs\\metrics\\metrics.json', bias_report_path='outputs\\metrics\\bias_report.json', overall_accuracy=0.7011, roc_auc=0.5531, all_bias_checks_passed=False, flagged_attributes=['race', 'marital.status'])
+[2026-05-07 20:33:38] INFO __main__ - >>>>>> Stage 03 — Bias Metrics completed <<<<<<
+
+x==========x
+[2026-05-07 20:33:38] INFO __main__ -   Accuracy              : 0.7011
+[2026-05-07 20:33:38] INFO __main__ -   ROC-AUC               : 0.5531
+[2026-05-07 20:33:38] INFO __main__ -   Bias verdict          : BIAS DETECTED ⚠️
+[2026-05-07 20:33:38] WARNING __main__ -   Flagged attributes    : ['race', 'marital.status']

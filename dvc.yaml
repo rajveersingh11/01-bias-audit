@@ -1,0 +1,64 @@
+stages:
+
+  data_ingestion:
+    cmd: python src/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/pipeline/stage_01_data_ingestion.py
+      - src/components/data_ingestion.py
+      - src/utils/common.py
+      - config/config.yaml
+    params:
+      - params.yaml:
+          - data.test_size
+          - data.random_seed
+          - bias.min_group_size
+    outs:
+      - data/raw/adult_income.csv
+      - data/processed/clean.csv
+
+  prepare_base_model:
+    cmd: python src/pipeline/stage_02_prepare_base_model.py
+    deps:
+      - src/pipeline/stage_02_prepare_base_model.py
+      - src/components/prepare_base_model.py
+      - config/config.yaml
+    params:
+      - params.yaml:
+          - model.epochs
+          - model.learning_rate
+    outs:
+      - outputs/model
+      - outputs/tokenizer
+
+  evaluation:
+    cmd: python src/pipeline/stage_03_evaluation.py
+    deps:
+      - src/pipeline/stage_03_evaluation.py
+      - src/components/evaluation.py
+      - data/processed/clean.csv
+      - outputs/model
+      - outputs/tokenizer
+    params:
+      - params.yaml:
+          - evaluation.batch_size
+          - evaluation.device
+    outs:
+      - outputs/cache
+    metrics:
+      - outputs/metrics/metrics.json:
+          cache: false
+    plots:
+      - outputs/metrics/bias_report.json:
+          cache: false
+
+  report:
+    cmd: python src/pipeline/stage_04_report.py
+    deps:
+      - src/pipeline/stage_04_report.py
+      - src/components/report.py
+      - src/components/visualize.py
+      - outputs/metrics/metrics.json
+      - outputs/metrics/bias_report.json
+      - outputs/cache
+    outs:
+      - outputs/reports
