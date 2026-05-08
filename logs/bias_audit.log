@@ -317,3 +317,25 @@ x==========x
 [2026-05-07 20:33:38] INFO __main__ -   ROC-AUC               : 0.5531
 [2026-05-07 20:33:38] INFO __main__ -   Bias verdict          : BIAS DETECTED ⚠️
 [2026-05-07 20:33:38] WARNING __main__ -   Flagged attributes    : ['race', 'marital.status']
+[2026-05-08 18:26:17] INFO src.pipeline.predict - PredictionPipeline initialised — device: cpu | model: outputs\model
+[2026-05-08 18:30:34] INFO src.pipeline.predict - PredictionPipeline initialised — device: cpu | model: outputs\model
+[2026-05-08 18:30:55] INFO src.pipeline.predict - Loading tokenizer from outputs\tokenizer
+[2026-05-08 18:30:55] INFO src.pipeline.predict - Loading model from outputs\model
+[2026-05-08 18:31:05] INFO src.pipeline.predict - Model ready
+[2026-05-08 18:31:05] DEBUG src.pipeline.predict - Input text: age 30, education Bachelors, occupation Prof-specialty, hours 40, sex Male, race White
+[2026-05-08 18:31:05] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.5912  |  P(<=50K)=0.5912  P(>50K)=0.4088)
+[2026-05-08 18:31:53] DEBUG src.pipeline.predict - Input text: age 35, education Masters, occupation Tech-support, hours 30, sex Female, race Amer-Indian-Eskimo
+[2026-05-08 18:31:53] INFO src.pipeline.predict - Prediction: >50K  (confidence: 0.8061  |  P(<=50K)=0.1939  P(>50K)=0.8061)
+[2026-05-08 18:32:18] DEBUG src.pipeline.predict - Input text: age 30, education Bachelors, occupation Prof-specialty, hours 40, sex Male, race White
+[2026-05-08 18:32:18] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.5912  |  P(<=50K)=0.5912  P(>50K)=0.4088)
+[2026-05-08 18:32:29] DEBUG src.pipeline.predict - Input text: age 35, education Masters, occupation Tech-support, hours 30, sex Female, race Black
+[2026-05-08 18:32:29] INFO src.pipeline.predict - Prediction: >50K  (confidence: 0.8399  |  P(<=50K)=0.1601  P(>50K)=0.8399)
+[2026-05-08 18:32:41] DEBUG src.pipeline.predict - Input text: age 35, education Some-college, occupation Tech-support, hours 30, sex Female, race Black
+[2026-05-08 18:32:41] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.9347  |  P(<=50K)=0.9347  P(>50K)=0.0653)
+[2026-05-08 18:32:53] DEBUG src.pipeline.predict - Input text: age 39, education Bachelors, occupation Exec-managerial, hours 40, sex Male, race White
+[2026-05-08 18:32:53] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.7322  |  P(<=50K)=0.7322  P(>50K)=0.2678)
+[2026-05-08 18:32:53] DEBUG src.pipeline.predict - Input text: age 28, education HS-grad, occupation Sales, hours 35, sex Female, race Black
+[2026-05-08 18:32:53] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.8117  |  P(<=50K)=0.8117  P(>50K)=0.1883)
+[2026-05-08 18:32:53] INFO src.pipeline.predict - Batch prediction complete — 2 records
+[2026-05-08 18:33:31] DEBUG src.pipeline.predict - Input text: age 40, education Some-college, occupation Sales, hours 40, sex Female, race Black
+[2026-05-08 18:33:31] INFO src.pipeline.predict - Prediction: <=50K  (confidence: 0.9247  |  P(<=50K)=0.9247  P(>50K)=0.0753)

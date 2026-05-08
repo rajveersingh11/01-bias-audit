@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bias Audit Income Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+        .page {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .hero {
+            display: grid;
+            gap: 16px;
+            padding: 24px 0;
+        }
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            line-height: 1.05;
+        }
+        p.lead {
+            margin: 0;
+            max-width: 720px;
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        .panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+            padding: 28px;
+            margin-top: 24px;
+        }
+        .grid {
+            display: grid;
+            gap: 18px;
+        }
+        .grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.98rem;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+            background: #fff;
+        }
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 14px 22px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+        button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .status {
+            margin-top: 12px;
+            padding: 16px;
+            border-radius: 16px;
+            background: #eef2ff;
+            color: #312e81;
+            border: 1px solid #c7d2fe;
+        }
+        .result-card {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .note {
+            color: #475569;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .section-head h2 {
+            margin: 0;
+            font-size: 1.35rem;
+        }
+        .footer {
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 840px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="note">Bias Audit • Income Prediction</p>
+                <h1>Fairness-aware income prediction interface</h1>
+                <p class="lead">Enter Adult dataset features and call the model for a predicted income bracket. This page is designed to work with the project's Flask API endpoints at <code>/predict</code> and <code>/predict/batch</code>.</p>
+            </div>
+            <div class="panel">
+                <div class="section-head">
+                    <div>
+                        <h2>Service health check</h2>
+                        <p class="note">Confirm the inference service is available before sending prediction requests.</p>
+                    </div>
+                </div>
+                <div class="button-row">
+                    <button id="healthButton" type="button">Check Health</button>
+                </div>
+                <div id="healthStatus" class="status" hidden></div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <h2>Single record prediction</h2>
+                    <p class="note">Use this form to submit one record and inspect the model output.</p>
+                </div>
+            </div>
+            <form id="predictForm" class="grid grid-2">
+                <div>
+                    <label for="age">Age</label>
+                    <input id="age" name="age" type="number" min="18" max="90" value="39" required>
+                </div>
+                <div>
+                    <label for="hoursPerWeek">Hours / week</label>
+                    <input id="hoursPerWeek" name="hours.per.week" type="number" min="1" max="100" value="40" required>
+                </div>
+                <div>
+                    <label for="education">Education</label>
+                    <select id="education" name="education" required>
+                        <option>Bachelors</option>
+                        <option>HS-grad</option>
+                        <option>Some-college</option>
+                        <option>Masters</option>
+                        <option>Assoc-acdm</option>
+                        <option>Assoc-voc</option>
+                        <option>Doctorate</option>
+                        <option>Prof-school</option>
+                        <option>11th</option>
+                        <option>10th</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="occupation">Occupation</label>
+                    <select id="occupation" name="occupation" required>
+                        <option>Exec-managerial</option>
+                        <option>Prof-specialty</option>
+                        <option>Sales</option>
+                        <option>Craft-repair</option>
+                        <option>Adm-clerical</option>
+                        <option>Handlers-cleaners</option>
+                        <option>Machine-op-inspct</option>
+                        <option>Transport-moving</option>
+                        <option>Other-service</option>
+                        <option>Tech-support</option>
+                        <option>Protective-serv</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sex">Sex</label>
+                    <select id="sex" name="sex" required>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="race">Race</label>
+                    <select id="race" name="race" required>
+                        <option>White</option>
+                        <option>Black</option>
+                        <option>Asian-Pac-Islander</option>
+                        <option>Amer-Indian-Eskimo</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </form>
+            <div class="button-row" style="margin-top: 20px;">
+                <button id="predictButton" type="button">Predict Income</button>
+            </div>
+            <div id="predictResult" class="result-card" hidden></div>
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <h2>Batch prediction</h2>
+                    <p class="note">Submit a JSON array of records for batch inference.</p>
+                </div>
+            </div>
+            <label for="batchPayload">JSON payload</label>
+            <textarea id="batchPayload" rows="10">[
+  {
+    "age": 39,
+    "education": "Bachelors",
+    "occupation": "Exec-managerial",
+    "hours.per.week": 40,
+    "sex": "Male",
+    "race": "White"
+  },
+  {
+    "age": 28,
+    "education": "HS-grad",
+    "occupation": "Sales",
+    "hours.per.week": 35,
+    "sex": "Female",
+    "race": "Black"
+  }
+]</textarea>
+            <div class="button-row" style="margin-top: 16px;">
+                <button id="batchButton" type="button">Run Batch</button>
+            </div>
+            <div id="batchResult" class="result-card" hidden></div>
+        </section>
+
+        <section class="footer">
+            <p>Note: This interface assumes the Flask service is running locally on port 5000 and exposes <code>/predict</code>, <code>/predict/batch</code>, and <code>/health</code> endpoints.</p>
+        </section>
+    </main>
+
+    <script>
+        const healthButton = document.getElementById("healthButton");
+        const predictButton = document.getElementById("predictButton");
+        const batchButton = document.getElementById("batchButton");
+        const healthStatus = document.getElementById("healthStatus");
+        const predictResult = document.getElementById("predictResult");
+        const batchResult = document.getElementById("batchResult");
+
+        function showStatus(element, text, isError = false) {
+            element.hidden = false;
+            element.textContent = text;
+            element.style.background = isError ? "#fee2e2" : "#eef2ff";
+            element.style.color = isError ? "#991b1b" : "#312e81";
+            element.style.borderColor = isError ? "#fecaca" : "#c7d2fe";
+        }
+
+        async function callApi(path, payload) {
+            const response = await fetch(path, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload),
+            });
+            const body = await response.json();
+            if (!response.ok) {
+                throw new Error(body.error || `Request failed with status ${response.status}`);
+            }
+            return body;
+        }
+
+        healthButton.addEventListener("click", async () => {
+            try {
+                healthStatus.hidden = true;
+                const response = await fetch("/health");
+                const body = await response.json();
+                if (!response.ok) {
+                    throw new Error(body.error || "Health check failed");
+                }
+                showStatus(healthStatus, `Service healthy – device: ${body.device} | test prediction: ${body.test_pred} (${body.test_conf})`);
+            } catch (error) {
+                showStatus(healthStatus, `Health check error: ${error.message}`, true);
+            }
+        });
+
+        predictButton.addEventListener("click", async () => {
+            const data = {
+                age: Number(document.getElementById("age").value),
+                education: document.getElementById("education").value,
+                occupation: document.getElementById("occupation").value,
+                "hours.per.week": Number(document.getElementById("hoursPerWeek").value),
+                sex: document.getElementById("sex").value,
+                race: document.getElementById("race").value,
+            };
+
+            try {
+                predictResult.hidden = true;
+                const result = await callApi("/predict", data);
+                predictResult.textContent = JSON.stringify(result, null, 2);
+                predictResult.hidden = false;
+            } catch (error) {
+                predictResult.textContent = `Error: ${error.message}`;
+                predictResult.hidden = false;
+            }
+        });
+
+        batchButton.addEventListener("click", async () => {
+            try {
+                batchResult.hidden = true;
+                const payload = JSON.parse(document.getElementById("batchPayload").value);
+                const result = await callApi("/predict/batch", payload);
+                batchResult.textContent = JSON.stringify(result, null, 2);
+                batchResult.hidden = false;
+            } catch (error) {
+                batchResult.textContent = `Error: ${error.message}`;
+                batchResult.hidden = false;
+            }
+        });
+    </script>
+</body>
+</html>

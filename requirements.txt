@@ -29,3 +29,5 @@ pytest-cov
 
 dvc
 pyyaml
+
+flask
